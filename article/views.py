@@ -8,7 +8,7 @@ from article.serializers import ArticleSerializer
 
 
 class ArticleView(APIView):
-    """ 게시글 생성, 조회조회조회 """
+    """ 게시글 생성, 조회 """
 
     def get(self, request):
         """ 전체 게시물 조회 """
@@ -23,6 +23,7 @@ class ArticleView(APIView):
         #     return Response({'message':'로그인 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
 
         serializer = ArticleSerializer(data=request.data)
+
         if serializer.is_valid():
             # serializer.save(user=request.user)
             serializer.save()
