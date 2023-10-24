@@ -8,3 +8,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
+
+    def create(self, validated_data):
+        user = super().create(validated_data)
+        password = user.password
+        user.set_password(password)
+        print(user.is_active)
+        user.save()
+
+        return user
