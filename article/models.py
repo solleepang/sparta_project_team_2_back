@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import User
 
 
 class Article(models.Model):
@@ -11,9 +12,9 @@ class Article(models.Model):
         max_digits=11, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(
         max_digits=11, decimal_places=6, null=True, blank=True)
-
-    # friends_ids = models.ManyToManyField('user.User', related_name='user_friend', blank=True) // 유저앱 추가 후 수정
-    # author_id = models.ForeignKey(User, on_delete=models.CASCADE) // 유저앱 추가 후 수정
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    friends_number = models.IntegerField(default=2)
+    friends_ids = models.ManyToManyField('user.User', related_name='user_friend', blank=True) 
 
     def __str__(self):
         return str(self.title)
