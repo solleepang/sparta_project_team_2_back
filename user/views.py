@@ -35,6 +35,7 @@ class FollowView(APIView):
 
 
 class ProfileView(APIView):
+
     def get(self, request, user_id):
         profile = get_object_or_404(User, id=user_id)
         if request.user.username == profile.username:
@@ -45,8 +46,9 @@ class ProfileView(APIView):
 
     def put(self, request, user_id):
         profile = get_object_or_404(User, id=user_id)
-        if request.user == profile.username:
-            serializer = UserProfileSerializer(profile, data=request.data)
+        if request.user == profile:
+            serializer = UserSerializer(
+                profile, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
