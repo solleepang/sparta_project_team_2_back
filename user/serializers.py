@@ -15,6 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         password = user.password
         user.set_password(password)
         print(user.is_active)
+        user.is_active = True
         user.save()
         return user
 

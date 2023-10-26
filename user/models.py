@@ -53,7 +53,8 @@ class User(AbstractBaseUser):
     nickname = models.CharField("닉네임", max_length=20)
     created_at = models.DateTimeField("가입일", auto_now_add=True)
     updated_at = models.DateTimeField("갱신일", auto_now=True)
-    image = models.ImageField(default='static/default_image.jpeg')
+    image = models.ImageField(
+        default='static/default_image.jpeg', null=True, blank=True)
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers", blank=True)
     is_active = models.BooleanField(default=True)
