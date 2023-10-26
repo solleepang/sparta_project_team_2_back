@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,3 +133,10 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "/static/"
+
+SIMPLE_JWT = {
+    # Access 토큰 유효 시간 설정하기
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    # Refresh 토큰 유효 시간 설정하기
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
