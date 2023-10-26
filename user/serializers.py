@@ -4,7 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):  # HyperlinkedModelSerializer
-    image = serializers.ImageField(use_url=True)
+    # image = serializers.ImageField(use_url=True)
 
     class Meta:
         model = User
@@ -21,7 +21,6 @@ class UserSerializer(serializers.ModelSerializer):  # HyperlinkedModelSerializer
 
     def update(self, instance, validated_data):
         user = super().update(instance, validated_data)
-        user = super().create(validated_data)
         password = user.password
         user.set_password(password)
         user.save()  # DB에 전달
