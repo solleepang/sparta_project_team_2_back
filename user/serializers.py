@@ -47,3 +47,19 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("image", "username", "nickname", "followings", "followers")
+
+
+class MyPageSerializer(serializers.ModelSerializer):
+    follower_count = serializers.SerializerMethodField()
+    following_count = serializers.SerializerMethodField()
+
+    def get_follower_count(self, obj):
+        return obj.followers.count()
+
+    def get_following_count(self, obj):
+        return obj.followings.count()
+
+    class Meta:
+        model = User
+        fields = ["username", "nickname",
+                  "follower_count", "following_count", "image"]

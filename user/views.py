@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from user.serializers import UserSerializer, UserProfileSerializer, LoginSerializer
+from user.serializers import UserSerializer, UserProfileSerializer, LoginSerializer, MyPageSerializer
 from user.models import User
 
 
@@ -56,3 +56,10 @@ class ProfileView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response("권한이 없습니다.", status=status.HTTP_403_FORBIDDEN)
+
+
+class MyPageView(APIView):
+    def get(self, request, user_id):
+        user = get_object_or_404(User, id=user_id)
+        serializer = MyPageSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
