@@ -3,7 +3,7 @@ from user.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):  # HyperlinkedModelSerializer
     image = serializers.ImageField(use_url=True)
 
     class Meta:
@@ -46,7 +46,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("image", "username", "nickname", "followings", "followers")
+        fields = ("image", "username", "nickname",
+                  "email", "followings", "followers")
 
 
 class MyPageSerializer(serializers.ModelSerializer):
