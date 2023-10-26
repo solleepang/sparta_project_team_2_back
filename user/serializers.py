@@ -4,7 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):  # HyperlinkedModelSerializer
-    image = serializers.ImageField(use_url=True)
+    # image = serializers.ImageField(use_url=True)
 
     class Meta:
         model = User
